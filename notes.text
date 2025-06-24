@@ -1,0 +1,26 @@
+PT.1 
+
+Alien Invasion Game Summary
+Modules Used:
+
+pygame for game functionality
+sys to handle exiting the game
+Game Structure:
+
+The game is built as a class called AlienInvasion.
+In the __init__() method:
+pygame.init() sets up Pygame.
+pygame.display.set_mode((1200, 800)) creates the game window.
+The window is stored in self.screen, a Pygame surface used for drawing.
+Game Loop (run_game() method):
+
+A while loop runs continuously to keep the game active.
+Inside it, a for loop (event loop) checks for user actions like key presses or window closing.
+pygame.event.get() retrieves recent events.
+If the player quits, sys.exit() is called to close the game.
+Screen Updates:
+
+pygame.display.flip() refreshes the screen to show the latest game state, enabling smooth animation.
+Execution:
+
+At the bottom of the file, an instance of AlienInvasion is created and run_game() is called if the script is run directly.
