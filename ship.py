@@ -52,5 +52,5 @@ class Ship:
             self.y += self.settings.ship_speed
         
         # Update rect object from self.x and self.y.
-        self.rect.x = self.x
-        self.rect.y = self.y
+        self.rect.x = int(self.x)
+        self.rect.y = int(self.y)

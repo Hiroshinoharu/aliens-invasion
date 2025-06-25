@@ -66,7 +66,6 @@ To display the player's ship in the game, we load an image and draw it using Pyg
   - The `blitme()` method draws the ship on the screen at its current position:
     ```python
     self.screen.blit(self.image, self.rect)
-    ```
 
 ### 📐 Coordinate System Note
 - The origin `(0, 0)` is at the top-left of the screen.
@@ -117,5 +116,59 @@ All game settings such as screen dimensions and background color are stored in a
 1. Install Pygame using pip.
 2. Run the `alien_invasion.py` file to start the game.
 3. Modify values in `settings.py` to customize the game’s appearance and behavior.
+
+---
+
+# Bullet Class Overview – Alien Invasion (Pygame)
+
+This document explains the purpose and structure of the `Bullet` class in the Alien Invasion game, focusing on how it integrates with Pygame's sprite system and interacts with the ship.
+
+---
+
+## Purpose
+
+The `Bullet` class represents projectiles fired by the player's ship. It inherits from `pygame.sprite.Sprite`, allowing bullets to be managed in groups and updated collectively.
+
+---
+
+## Key Concepts
+
+### 1. Inheriting from Sprite
+
+- The class inherits from `pygame.sprite.Sprite`.
+- This enables grouping and batch operations on bullets (e.g., updating, drawing, collision detection).
+
+### 2. Initialization
+
+- The `__init__()` method requires the current instance of `AlienInvasion`.
+- `super()` is used to properly initialize the Sprite base class.
+- Attributes are set for:
+  - `screen`
+  - `settings`
+  - `color`
+
+---
+
+## Bullet Rect Creation
+
+### ❶ Creating the Rect
+
+- Since the bullet is not image-based, a `pygame.Rect()` is created manually.
+- Initialized at `(0, 0)` with width and height from `self.settings`.
+- The rect is then repositioned based on the ship’s current location.
+
+### ❷ Aligning with the Ship
+
+- The bullet’s `midtop` is set to match the ship’s `midtop`.
+- This ensures bullets appear to fire from the top center of the ship.
+
+---
+
+## Movement and Precision
+
+### ❸ Using Float for Y-Coordinate
+
+- The bullet’s vertical position (`y`) is stored as a float.
+- This allows for smoother and more precise movement, especially at higher speeds.
 
 ---

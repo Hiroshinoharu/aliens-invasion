@@ -2,6 +2,7 @@ import sys
 import pygame
 from ship import Ship
 from settings import Settings
+from bullet import Bullet
 
 class AlienInvasion:
     """
@@ -22,14 +23,26 @@ class AlienInvasion:
         
         # Intialise the ship 
         self.ship = Ship(self)
+        #Intialise the bullet
+        self.bullets = pygame.sprite.Group()
         
     def run_game(self):
         """Start the main loop for the game."""
         while True:
             self._check_events()
             self.ship.update()
+            self._update_bullets()
             self._update_screen()
             self.clock.tick(60)
+
+    def _update_bullets(self):
+        self.bullets.update()
+            
+            # Get rid of bullets that have disappeared.
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+        print(len(self.bullets))
 
     def _check_events(self):
         """Respond to key presses and mouse events."""
@@ -47,6 +60,11 @@ class AlienInvasion:
     def _update_screen(self):
         """Update the screen with the current game state."""
         self.screen.fill(self.settings.bg_color)
+        
+        # Run a loop for the bullets
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
+        
         self.ship.blitme()
         # Make the most recently drawn screen visible
         pygame.display.flip()
@@ -64,6 +82,8 @@ class AlienInvasion:
             self.ship.moving_down = True
         elif event.key == pygame.K_q:
             sys.exit()
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
             
     def _check_keyup_events(self,event):
         """Check for key releases."""
@@ -75,6 +95,12 @@ class AlienInvasion:
             self.ship.moving_up = False
         elif event.key == pygame.K_DOWN:
             self.ship.moving_down = False
+    
+    def _fire_bullet(self):
+        """Create a new bullet and add it to the bullets group."""
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
 
 # Run the game if this file is executed directly
 if __name__ == '__main__':
