@@ -172,3 +172,39 @@ The `Bullet` class represents projectiles fired by the player's ship. It inherit
 - This allows for smoother and more precise movement, especially at higher speeds.
 
 ---
+
+---
+
+## Goal
+
+To draw a fleet of aliens across the top of the screen, adding aliens until there’s no space left for a new alien. This process is repeated as long as there is enough vertical space to add a new row.
+
+---
+
+## Creating a Row of Aliens
+
+To generate a full row of aliens, we first create a single alien to access its width. We then place an alien on the left side of the screen and keep adding aliens until we run out of space.
+
+---
+
+## Calculating Spacing
+
+1. **Alien Width**: We get the alien’s width from the first alien created.
+2. **Initial Position**: Define a variable `current_x` to refer to the horizontal position of the next alien. Initially set to one alien width to offset the first alien from the left edge.
+
+---
+
+## Loop Logic for Placing Aliens
+
+1. **While Loop**: Continue adding aliens while there’s enough room to place one.
+2. **Condition**: Compare `current_x` to a maximum value to determine if there’s room for another alien.
+3. **Creating Aliens**:
+   - Create an alien at the correct position.
+   - Define the horizontal position of the next alien.
+4. **Positioning**:
+   - Set the precise horizontal position to the current value of `current_x`.
+   - Position the alien’s rect at this x-value.
+   - Add the new alien to the group `self.aliens`.
+5. **Increment**: Increment `current_x` by two alien widths to move past the alien just added and leave space between aliens.
+
+---

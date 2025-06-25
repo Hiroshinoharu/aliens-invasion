@@ -34,16 +34,52 @@ class AlienInvasion:
         """Create the fleet of aliens."""
         # Make an alien
         alien = Alien(self)
-        self.aliens.add(alien)
+        alien_width, alien_height = alien.rect.size
+        
+        current_x, current_y = alien_width, alien_height
+        while current_y < (self.settings.screen_height - 3 * alien_height):
+            while current_x < (self.settings.screen_width - 2 * alien_width):
+                self._spawn_alien(current_x, current_y)
+                current_x += (2 * alien_width)
+            
+            # Finshed a Row; resets x values and increments y value.
+            current_x = alien_width
+            current_y += 2 * alien_height
 
+    def _spawn_alien(self, alien_position_x, alien_position_y):
+        new_alien = Alien(self)
+        new_alien.x = alien_position_x
+        new_alien.rect.x = alien_position_x
+        new_alien.rect.y = alien_position_y
+        self.aliens.add(new_alien)
+        
     def run_game(self):
         """Start the main loop for the game."""
         while True:
             self._check_events()
             self.ship.update()
             self._update_bullets()
+            self._update_aliens()
             self._update_screen()
             self.clock.tick(60)
+            
+    def _update_aliens(self):
+        """Update the position of the aliens."""
+        self._check_fleet_edges()
+        self.aliens.update()
+        
+    def _check_fleet_edges(self):
+        """Respond appropriately if any aliens have reached an edge."""
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+            
+    def _change_fleet_direction(self):
+        """Drop the entire fleet down and change the direction."""
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
 
     def _update_bullets(self):
         self.bullets.update()
