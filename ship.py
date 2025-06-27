@@ -54,3 +54,8 @@ class Ship:
         # Update rect object from self.x and self.y.
         self.rect.x = int(self.x)
         self.rect.y = int(self.y)
+        
+    def center_ship(self):
+        """Center the ship on the screen."""
+        self.rect.midbottom = self.screen_rect.midbottom
+        self.x = float(self.rect.x)
