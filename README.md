@@ -206,5 +206,3 @@ To generate a full row of aliens, we first create a single alien to access its w
    - Position the alien’s rect at this x-value.
    - Add the new alien to the group `self.aliens`.
 5. **Increment**: Increment `current_x` by two alien widths to move past the alien just added and leave space between aliens.
-
----
