@@ -1,5 +1,7 @@
 # 🛸 Alien Invasion Game (Pygame)
 
+A classic arcade-style 2D game where the player controls a spaceship to defend against waves of invading aliens. Built using Python and Pygame, this game features smooth animations, increasing difficulty levels, and a scoring system.
+
 This project is a simple 2D game built using Python and Pygame. The game window displays a blank screen and sets the foundation for adding interactive elements like a spaceship and aliens.
 
 ## 🚀 Game Structure
